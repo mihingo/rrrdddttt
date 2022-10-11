@@ -1,5 +1,6 @@
 import { MikroORM } from "@mikro-orm/core";
 import { Post } from "./entities/Post";
+import { User } from "./entities/User";
 import { __PROD__ } from "./utils/constants";
 
 export default {
@@ -9,7 +10,7 @@ export default {
     pathTs: "src/migrations",
     glob: "!(*.d).{js,ts}",
   },
-  entities: [Post],
+  entities: [Post, User],
   dbName: "wemisdev",
   type: "postgresql",
   debug: !__PROD__,
