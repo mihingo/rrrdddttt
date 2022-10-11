@@ -32,4 +32,37 @@ export class PostResolver {
     await em.persistAndFlush(post);
     return post;
   }
+  @Mutation(() => Post, { nullable: true })
+  async updatePost(
+    @Arg("id", () => Int) id: number,
+    @Arg("title", () => String, { nullable: true }) title: string,
+    @Arg("content", () => String, { nullable: true }) content: string,
+    @Ctx() { em }: MyContext
+  ): Promise<Post | null> {
+    const post = await em.findOne(Post, { id });
+    if (!post) {
+      //throw new Error("Post not found!");
+      return null;
+    }
+    if (typeof title !== "undefined" || typeof content !== "undefined") {
+      title && (post.title = title);
+      content && (post.content = content);
+      post.updatedAt = new Date();
+      await em.persistAndFlush(post);
+    }
+    return post;
+  }
+
+  @Mutation(() => Boolean)
+  async deletePost(
+    @Arg("id", () => Int) id: number,
+    @Ctx() { em }: MyContext
+  ): Promise<boolean> {
+    const post = await em.findOne(Post, { id });
+    if (!post) {
+      return false;
+    }
+    await em.nativeDelete(Post, { id });
+    return true;
+  }
 }
