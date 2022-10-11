@@ -42,7 +42,7 @@ __decorate([
     (0, type_graphql_1.Field)(),
     (0, core_1.Property)({ type: "text" }),
     __metadata("design:type", String)
-], Post.prototype, "post", void 0);
+], Post.prototype, "content", void 0);
 Post = __decorate([
     (0, type_graphql_1.ObjectType)(),
     (0, core_1.Entity)()

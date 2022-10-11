@@ -19,14 +19,44 @@ let PostResolver = class PostResolver {
     posts({ em }) {
         return em.find(Post_1.Post, {});
     }
+    post(id, { em }) {
+        return em.findOne(Post_1.Post, { id });
+    }
+    async createPost(title, content, { em }) {
+        const post = em.create(Post_1.Post, {
+            title,
+            content,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
+        await em.persistAndFlush(post);
+        return post;
+    }
 };
 __decorate([
     (0, type_graphql_1.Query)(() => [Post_1.Post]),
     __param(0, (0, type_graphql_1.Ctx)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], PostResolver.prototype, "posts", null);
+__decorate([
+    (0, type_graphql_1.Query)(() => Post_1.Post, { nullable: true }),
+    __param(0, (0, type_graphql_1.Arg)("id", () => type_graphql_1.Int)),
+    __param(1, (0, type_graphql_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], PostResolver.prototype, "post", null);
+__decorate([
+    (0, type_graphql_1.Mutation)(() => Post_1.Post),
+    __param(0, (0, type_graphql_1.Arg)("title", () => String)),
+    __param(1, (0, type_graphql_1.Arg)("content", () => String)),
+    __param(2, (0, type_graphql_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:returntype", Promise)
+], PostResolver.prototype, "createPost", null);
 PostResolver = __decorate([
     (0, type_graphql_1.Resolver)()
 ], PostResolver);

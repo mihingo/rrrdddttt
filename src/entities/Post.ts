@@ -22,5 +22,5 @@ export class Post {
 
   @Field()
   @Property({ type: "text" })
-  post!: string;
+  content!: string;
 }

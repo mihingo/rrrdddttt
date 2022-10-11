@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { MikroORM } from "@mikro-orm/core";
 import microConfigs from "./mikro-orm.config";
 import express from "express";
