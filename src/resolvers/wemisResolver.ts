@@ -9,6 +9,8 @@ export class WemisResolver {
   }
   @Query(() => String)
   wemis() {
-    return "Welcom to wemis system! Is this is Prod?  " + __PROD__;
+    return `Welcome to wemis system! This is ${
+      __PROD__ ? "" : "not"
+    } Production Environment!  `;
   }
 }

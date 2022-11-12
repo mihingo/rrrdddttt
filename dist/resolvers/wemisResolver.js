@@ -17,7 +17,7 @@ let WemisResolver = class WemisResolver {
         return "Hello World!";
     }
     wemis() {
-        return "Welcom to wemis system! Is this is Prod?  " + constants_1.__PROD__;
+        return `Welcome to wemis system! This is ${constants_1.__PROD__ ? "" : "not"} Production Environment!  `;
     }
 };
 __decorate([
